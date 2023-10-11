@@ -1,0 +1,9 @@
+.day-border {
+    border-style: hidden;
+    background-color: grey;
+    width: 150px;
+    height: 150px;  
+    padding: 5px;
+    margin: 10px;
+    color: white;
+}
