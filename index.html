@@ -20,21 +20,28 @@
                 <h1 id="search-id">Search for a City:</h1>
                 <form class="form-inline" id="form-inline">
                     <div class="form-group col-md-8">
-                      <label class="sr-only col-md-12" for="search-data"></label>
+                      <label class="sr-only col-md-12" for="search-city"></label>
                       <div class="input-group col-md-12">
-                        <input type="text" class="form-control" id="search-data" placeholder="Enter a City Here">
+                        <input type="text" class="form-control border border-dark border-3" id="search-city" placeholder="Enter a City Here">
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary border border-dark border-3">Search</button>
                   </form>
+                  <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <h2></h2>
+                    <button type="button" class="btn btn-primary">Button</button>
+                    <button type="button" class="btn btn-primary">Button</button>
+                    <button type="button" class="btn btn-primary">Button</button>
+                  </div>
             </div>
             <div id="right" class="col-9">
                 <div id="upper">
-                    <div class="card row" style="width: 100%;">
+                    <div class="card row border border-dark border-3" style="width: 100%;">
                         <div class="card-body">
-                            <h2 class="card-title">City (data)</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h2 class="card-title font-weight: bold">City (date)</h5>
+                            <h5 class="card-temp mb-2 text-body-secondary">Temp: </h5>
+                            <h5 class="card-wind mb-2 text-body-secondary">Wind: </h5>
+                            <h5 class="card-humidity mb-2 text-body-secondary">Humidity: </h5>
                         </div>
                     </div>
                     <div id="display-weather" class="row">
@@ -51,5 +58,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="assets/js/script.js"></script>
 </html>
