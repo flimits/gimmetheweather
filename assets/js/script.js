@@ -114,6 +114,10 @@ var goGetForcast = function (lonTude, latTude) {
                 var dayTitle = document.createElement('h3');
                 dayTitle.textContent = 'Day ' + (i + 1);
 
+                // How about we get the icon in those boxes too
+                var iconImg = document.createElement('img');
+                iconImg.src = 'https://openweathermap.org/img/wn/' + doFiveDay.list[i].weather[0].icon + '.png';
+
                 // Create and populate elements for the forecast data (adjust as needed)
                 var tempParagraph = document.createElement('p');
                 tempParagraph.textContent = 'Temp: ' + doFiveDay.list[i].main.temp + '°F';
@@ -127,6 +131,7 @@ var goGetForcast = function (lonTude, latTude) {
                 // Append the elements to the existing boxElement
                 boxElement.innerHTML = '';  // Clear previous content
                 boxElement.appendChild(dayTitle);
+                boxElement.appendChild(iconImg);
                 boxElement.appendChild(tempParagraph);
                 boxElement.appendChild(windParagraph);
                 boxElement.appendChild(humidityParagraph);

@@ -14,5 +14,18 @@
 }
 
 .weather-info img {
-    margin-left: 10px; /* Adjust the margin as needed */
+    margin-left: 10px;
+}
+
+/* Need to get the 5 day border boxes a little bigger */
+/* Style the title for each day in the forecast box */
+.day-border h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Style the forecast data paragraphs */
+.day-border p {
+    font-size: 14px;
+    margin-bottom: 3px;
 }
