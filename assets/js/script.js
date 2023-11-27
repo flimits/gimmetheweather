@@ -3,6 +3,7 @@ var searchCity = document.querySelector("#search-city");
 var state = "ca";
 var apiKey = "3d08e285a7104854e880e77d9ed464c9";
 var mainWeatherBox = document.querySelector(".card-title");
+var mainWeatherCondition = document.querySelector(".card-condition");
 var mainTemp = document.querySelector(".card-temp");
 var mainWind = document.querySelector(".card-wind");
 var mainHumidity = document.querySelector(".card-humidity");
@@ -54,18 +55,33 @@ var goGetWeather = function (city, state, lonTude, latTude) {
     var buildWeatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latTude + "&lon=" + lonTude + "&appid=" + apiKey + "&units=imperial";
     console.log("the weather url to use is " + buildWeatherURL)
 
-    
+    var weatherIconUrl = 'https://openweathermap.org/img/wn/';
+
     fetch(buildWeatherURL)
         .then(function (response) {
             return response.json();
         })
         .then(function (doWeather) {
+            // Create an image element for the weather icon
+            var iconImg = document.createElement('img');
+            iconImg.src = `${weatherIconUrl}${doWeather.weather[0].icon}@2x.png`;  // Use the icon code from the API response
+
+            // Find the #weather-icon div and append the iconImg to it
+            var weatherIconContainer = document.getElementById('weather-icon');
+            weatherIconContainer.innerHTML = '';  // Clear previous content
+            weatherIconContainer.appendChild(iconImg);
+
+            // Display the weather condition
+            mainWeatherCondition.textContent = "Condition: " + doWeather.weather[0].main;
+            console.log("the icon code is: " + iconImg.src + " icon name " + doWeather.weather[0].main + " text content " + mainWeatherCondition.textContent)
+
             console.log("Todays Date: " + todaysDate)
             console.log("City Name: " + doWeather.name);
             console.log("Temp: " + doWeather.main.temp + "°F");
             console.log("Weather: " + doWeather.weather[0].main);
             console.log("Wind: " + doWeather.wind.speed + " MPH");
             console.log("Humidity: " + doWeather.main.humidity + " %");
+
 
             mainWeatherBox.textContent = doWeather.name + " (" + todaysDate + ") " + doWeather.weather[0].main;
             mainTemp.textContent = "Temp: " + doWeather.main.temp + "°F";
