@@ -7,3 +7,12 @@
     margin: 10px;
     color: white;
 }
+
+.weather-info {
+    display: flex;
+    align-items: center;
+}
+
+.weather-info img {
+    margin-left: 10px; /* Adjust the margin as needed */
+}

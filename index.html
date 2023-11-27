@@ -23,13 +23,16 @@
                         <label class="sr-only col-md-12" for="search-city"></label>
                         <div class="input-group col-md-12">
                             <input type="text" class="form-control border border-dark border-3" id="search-city"
-                                placeholder="Enter a City Here">
+                            placeholder="Enter a City Here">
+                            <input type="text" class="form-control border border-dark border-3" id="search-state"
+                            placeholder="Enter a State Here">
+                                
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary border border-dark border-3">Search</button>
                 </form>
                 <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                    <h2></h2>
+                    <!-- <h2></h2> -->
                     <button type="button" class="btn btn-primary">Search Stored</button>
                     <button type="button" class="btn btn-primary">Search Stored</button>
                     <button type="button" class="btn btn-primary">Search Stored</button>
@@ -40,9 +43,10 @@
                     <div class="card row border border-dark border-3" style="width: 100%;">
                         <div class="card-body">
                             <h2 class="card-title font-weight: bold">City (date)</h2>
-                            <!-- Insert the weather icon here -->
-                            <div id="weather-icon"></div>
-                            <h5 class="card-condition mb-2 text-body-secondary">Condition: </h5>
+                            <div class="weather-info">
+                                <h5 class="card-condition mb-2 text-body-secondary">Condition: </h5>
+                                <div id="weather-icon"></div>
+                            </div>
                             <h5 class="card-temp mb-2 text-body-secondary">Temp: </h5>
                             <h5 class="card-wind mb-2 text-body-secondary">Wind: </h5>
                             <h5 class="card-humidity mb-2 text-body-secondary">Humidity: </h5>
@@ -50,16 +54,11 @@
                     </div>
                     <div id="display-weather" class="row">
                         <h2 class="5-day">5-Day Forecast</h2>
-                        <div class="col-2 day-border box-0">
-                            <p>test1</p>
-                            <p>test2</p>
-                        </div>
-                        <div class="col-2 day-border box-1">july</div>
-                        <div class="col-2 day-border box-2">august</div>
-                        <div class="col-2 day-border box-3">september</div>
-                        <div class="col-2 day-border box-4">october</div>
-
-
+                        <div class="col-2 day-border box-0">Day 1</div>
+                        <div class="col-2 day-border box-1">Day 2</div>
+                        <div class="col-2 day-border box-2">Day 3</div>
+                        <div class="col-2 day-border box-3">Day 4</div>
+                        <div class="col-2 day-border box-4">Day 5</div>
                     </div>
                 </div>
             </div>

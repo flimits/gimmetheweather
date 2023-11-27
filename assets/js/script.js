@@ -1,6 +1,7 @@
 var searchForm = document.querySelector("#form-inline");
 var searchCity = document.querySelector("#search-city");
-var state = "ca";
+var searchState = document.querySelector("#search-state");
+// var state = "ca";
 var apiKey = "3d08e285a7104854e880e77d9ed464c9";
 var mainWeatherBox = document.querySelector(".card-title");
 var mainWeatherCondition = document.querySelector(".card-condition");
@@ -13,25 +14,27 @@ var todaysDate = dayjs().format('MM/DD/YYYY');
 
 var buildSearchData = function (event) {
     var cityToSearch = searchCity.value.trim();
+    var stateToSearch = searchState.value.trim().toUpperCase();
+
     event.preventDefault();
 
     console.log("value of city to search is: " + cityToSearch);
 
-    longAndLat(cityToSearch, state)
+    longAndLat(cityToSearch, stateToSearch)
 }
 
-function longAndLat(city, state) {
+function longAndLat(city, stateToSearch) {
     if (!city) {
         alert("You need to enter a city. Please try again");
         return;
     }
 
-    if (!state || state === "" || state === null) {
+    if (!stateToSearch || stateToSearch === "" || stateToSearch === null) {
         alert("No state found");
         return;
     } else
 
-        var lalUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + state + "," + "&limit=1&appid=" + apiKey;
+        var lalUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "," + stateToSearch + "," + "&limit=1&appid=" + apiKey;
     console.log("Long and Lat " + lalUrl)
 
     fetch(lalUrl)
@@ -44,13 +47,13 @@ function longAndLat(city, state) {
             var lonTude = doResponse[0].lon;
             var latTude = doResponse[0].lat;
 
-            goGetWeather(city, state, lonTude, latTude)
+            goGetWeather(city, stateToSearch, lonTude, latTude)
 
         });
 }
 
 
-var goGetWeather = function (city, state, lonTude, latTude) {
+var goGetWeather = function (city, stateToSearch, lonTude, latTude) {
 
     var buildWeatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latTude + "&lon=" + lonTude + "&appid=" + apiKey + "&units=imperial";
     console.log("the weather url to use is " + buildWeatherURL)
@@ -83,7 +86,7 @@ var goGetWeather = function (city, state, lonTude, latTude) {
             console.log("Humidity: " + doWeather.main.humidity + " %");
 
 
-            mainWeatherBox.textContent = doWeather.name + " (" + todaysDate + ") " + doWeather.weather[0].main;
+            mainWeatherBox.textContent = doWeather.name + "," + stateToSearch + " (" + todaysDate + ") " + doWeather.weather[0].main;
             mainTemp.textContent = "Temp: " + doWeather.main.temp + "°F";
             mainWind.textContent = "Wind: " + doWeather.wind.speed + " MPH"
             mainHumidity.textContent = "Humidity: " + doWeather.main.humidity + " %"
@@ -102,21 +105,34 @@ var goGetForcast = function (lonTude, latTude) {
             return response.json();
         })
         .then(function (doFiveDay) {
-
+            // Loop through the forecast data
             for (var i = 0; i < 5; i++) {
-                console.log("temp for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].main.temp + "°F");
-                console.log("wind for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].wind.speed);
-                console.log("humidity for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].main.humidity);
-                // This below is suppose to be a way to populate the 5-da forecast boxes. ... I would have been done, except I ran out of time.
-                // Below is not the proper format. I need to build the p and append to the main div, not each box individually.
-                    // p1 = document.createElement("p");
-                    // p1.innerHTML = doFiveDay.list[i].main.temp + "°F";
-                    // fiveDayDiv.append(p1);
+                // Find the existing box element
+                var boxElement = document.querySelector('.box-' + i);
+
+                // Create the title of eac day in the 5-day forcast
+                var dayTitle = document.createElement('h3');
+                dayTitle.textContent = 'Day ' + (i + 1);
+
+                // Create and populate elements for the forecast data (adjust as needed)
+                var tempParagraph = document.createElement('p');
+                tempParagraph.textContent = 'Temp: ' + doFiveDay.list[i].main.temp + '°F';
+
+                var windParagraph = document.createElement('p');
+                windParagraph.textContent = 'Wind: ' + doFiveDay.list[i].wind.speed + ' MPH';
+
+                var humidityParagraph = document.createElement('p');
+                humidityParagraph.textContent = 'Humidity: ' + doFiveDay.list[i].main.humidity + '%';
+
+                // Append the elements to the existing boxElement
+                boxElement.innerHTML = '';  // Clear previous content
+                boxElement.appendChild(dayTitle);
+                boxElement.appendChild(tempParagraph);
+                boxElement.appendChild(windParagraph);
+                boxElement.appendChild(humidityParagraph);
             }
-
         });
-
-
 }
+
 
 searchForm.addEventListener("submit", buildSearchData);
