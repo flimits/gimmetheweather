@@ -54,6 +54,7 @@ var goGetWeather = function (city, state, lonTude, latTude) {
     var buildWeatherURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latTude + "&lon=" + lonTude + "&appid=" + apiKey + "&units=imperial";
     console.log("the weather url to use is " + buildWeatherURL)
 
+    
     fetch(buildWeatherURL)
         .then(function (response) {
             return response.json();
@@ -87,10 +88,10 @@ var goGetForcast = function (lonTude, latTude) {
         .then(function (doFiveDay) {
 
             for (var i = 0; i < 5; i++) {
-                console.log("temp for day " + i " of the 5-day forcast: " + doFiveDay.list[i].main.temp + "°F")
-                console.log("wind for day " + i " of the 5-day forcast: " + doFiveDay.list[i].wind.speed)
-                console.log("humidity for day " + i " of the 5-day forcast: " + doFiveDay.list[i].main.humidity)
-                // This below is suppose to be a way to populate the 5-da forecast boxes. ... I woulc have been done, except I ran out of time.
+                console.log("temp for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].main.temp + "°F");
+                console.log("wind for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].wind.speed);
+                console.log("humidity for day " + i + " of the 5-day forcast: " + doFiveDay.list[i].main.humidity);
+                // This below is suppose to be a way to populate the 5-da forecast boxes. ... I would have been done, except I ran out of time.
                 // Below is not the proper format. I need to build the p and append to the main div, not each box individually.
                     // p1 = document.createElement("p");
                     // p1.innerHTML = doFiveDay.list[i].main.temp + "°F";
